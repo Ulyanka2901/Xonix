@@ -12,7 +12,7 @@ def relative_to_assets(path: str) -> Path:
 
 
 window = Tk()
-
+window.title("Xonix")
 
 window_width = 720
 window_height = 480
@@ -50,7 +50,7 @@ image_1 = canvas.create_image(
 
 def open_game():
     window.destroy()
-    subprocess.Popen(['python', 'xonix.py'])
+    subprocess.Popen(['python', 'xonix/xonix.py'])
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))

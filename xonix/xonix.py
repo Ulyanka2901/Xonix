@@ -3,11 +3,11 @@ import tkinter
 from PIL import Image, ImageDraw
 
 # Направления движения
-DIRECTION_LEFT = 37
-DIRECTION_RIGHT = 39
-DIRECTION_UP = 38
-DIRECTION_DOWN = 40
-DIRECTION_SPACE = 32  # Пробел для перезапуска
+DIRECTION_LEFT = 'Left'
+DIRECTION_RIGHT = 'Right'
+DIRECTION_UP = 'Up'
+DIRECTION_DOWN = 'Down'
+DIRECTION_SPACE = 'space'# Пробел для перезапуска
 
 DIRECTIONS_HORIZONTAL = (DIRECTION_RIGHT, DIRECTION_LEFT)
 DIRECTIONS_VERTICAL = (DIRECTION_UP, DIRECTION_DOWN)
@@ -288,10 +288,10 @@ class Game:
                                     outline=COLORS['ENEMY'], fill=COLORS['ENEMY'])
 
     def key_press(self, event):
-        if self.is_game_over and event.keycode == DIRECTION_SPACE:
+        if self.is_game_over and event.keysym == DIRECTION_SPACE:
             self.restart()
-        elif event.keycode in DIRECTIONS_ALL:
-            self.pressed_key = event.keycode
+        elif event.keysym in DIRECTIONS_ALL:
+            self.pressed_key = event.keysym
 
     def game_over(self):
         self.is_stop = True
