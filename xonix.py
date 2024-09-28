@@ -38,7 +38,7 @@ COLORS = {
 
 class Player:
     def __init__(self, field_width, field_height):
-        self.field_width = field_width
+        self.field_width = field_width #заданный размер игрового поля
         self.field_height = field_height
         self.head = (VISIBLE_WIDTH // 2 + 1, VISIBLE_HEIGHT // 2 + 1)  # Центр видимой области
         self.area = set()  # Захваченная область
@@ -74,6 +74,7 @@ class Player:
         """
         Движение головы игрока по полю
         """
+        #Если направление не задано, игрок остается на месте
         if not self.started and self._direction is not None:
             self.started = True
 
@@ -84,7 +85,7 @@ class Player:
         # Добавляем текущую позицию головы в след, если она не в захваченной области
         if self.head not in self.area and self.head not in self.trace:
             self.trace.append(self.head)
-
+        #Измените положение игрока в зависимости от направления
         head = self.head
         if self._direction == DIRECTION_LEFT:
             head = (head[0] - 1, head[1])
@@ -123,9 +124,10 @@ class Player:
         """
         Используем Pillow для определения замкнутой области и её заливки.
         """
+        #Создаём новое изображение с теми же размерами, что и игровое поле
         img = Image.new('L', (self.field_width, self.field_height), 255)
         draw = ImageDraw.Draw(img)
-
+        #рисуем область и обводим контур на изображении
         for x, y in self.area:
             draw.point((x, y), fill=0)
 
@@ -288,6 +290,7 @@ class Game:
                                     outline=COLORS['ENEMY'], fill=COLORS['ENEMY'])
 
     def key_press(self, event):
+        #Проверка, закончена ли игра и нажат ли пробел
         if self.is_game_over and event.keysym == DIRECTION_SPACE:
             self.restart()
         elif event.keysym in DIRECTIONS_ALL:

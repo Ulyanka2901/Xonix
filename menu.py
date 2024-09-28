@@ -50,7 +50,7 @@ image_1 = canvas.create_image(
 
 def open_game():
     window.destroy()
-    subprocess.Popen(['python', 'xonix/xonix.py'])
+    subprocess.Popen(['python', 'xonix.py'])
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
